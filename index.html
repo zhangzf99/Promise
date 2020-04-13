@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./01.js"></script>
+  <script>
+    // var p = new HD((resolve,reject)=>{
+    //   resolve('成功');
+    //   // console.log(aaa)
+    //   // reject('失败');
+    //   // setTimeout(()=>{
+    //   //   // reject('失败');
+    //   //   // resolve('成功');
+    //   //   // console.log('你好')
+    //   // },1000)
+    // })
+    // .then().then((value)=>{
+    //   // console.log(a);
+    //   console.log('成功',value)
+    //   return '中芳'
+    // },(error)=>{
+    //   // console.log(aaa)
+    //   console.log('error',error);
+    //   return '1111'
+    // }).then().then((value)=>{
+    //   // console.log(b)
+    //   console.log('中芳',value)
+    //   return '世界你好'
+    // },(error)=>{
+    //   console.log(error)
+    //   return 'hello world'
+    // }).then((value)=>{
+    //   console.log('世界你好',value)
+    //   return new HD((resolve)=>{
+    //     resolve('最终')
+    //   })
+    // }).then((value)=>{
+    //   console.log('====',value)
+    // })
+    // // console.log(p);
+    // // console.log('我是主线程')
+    var p = new HD((resolve,reject)=>{
+      // reject('成功');
+      setTimeout(()=>{
+        reject('成功')
+      })
+    })
+    .then((value)=>{
+      console.log('成功====',value)
+      return new HD((resolve,reject)=>{
+        resolve('错误')
+      })
+    },(error)=>{
+      console.log('error   ' + error)
+      return new HD((resolve,reject)=>{
+        reject('失败')
+      })
+    }).then((value)=>{
+      console.log('====',value)
+    },(error)=>{
+      console.log('++++',error)
+    })
+    // console.log(p);
+    // console.log('我是主线程')
+  </script>
+</body>
+</html>
